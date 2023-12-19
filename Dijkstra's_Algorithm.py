@@ -3,44 +3,41 @@ class Graph():
         self.vertices = vertices
         self.graph = [[0 for column in range(vertices)]
                       for row in range(vertices)]
- 
-    def printSolution(self, dist):
+
+    def display(self, distance):
         print("Vertex \t Distance from Source")
-        for node in range(self.V):
-            print(node, "\t\t", dist[node])
- 
-    def minDistance(self, dist, sptSet):
+        for node in range(self.vertices):
+            print(node, "\t\t", distance[node])
+
+    def minDistance(self, distance, verticesset):
         min = 1e7
-        for v in range(self.V):
-            if dist[v] < min and sptSet[v] == False:
-                min = dist[v]
+        for v in range(self.vertices):
+            if distance[v] < min and verticesset[v] == False:
+                min = distance[v]
                 min_index = v
         return min_index
 
     def dijkstra(self, src):
-        dist = [1e7] * self.V
+        dist = [1e7] * self.vertices
         dist[src] = 0
-        sptSet = [False] * self.V
-        for cout in range(self.V):
+        sptSet = [False] * self.vertices
+        for i in range(self.vertices):
             u = self.minDistance(dist, sptSet)
             sptSet[u] = True
-            for v in range(self.V):
+            for v in range(self.vertices):
                 if (self.graph[u][v] > 0 and
-                   sptSet[v] == False and
-                   dist[v] > dist[u] + self.graph[u][v]):
+                        sptSet[v] == False and
+                        dist[v] > dist[u] + self.graph[u][v]):
                     dist[v] = dist[u] + self.graph[u][v]
-        self.printSolution(dist)
- 
-g = Graph(9)
-g.graph = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
-           [4, 0, 8, 0, 0, 0, 0, 11, 0],
-           [0, 8, 0, 7, 0, 4, 0, 0, 2],
-           [0, 0, 7, 0, 9, 14, 0, 0, 0],
-           [0, 0, 0, 9, 0, 10, 0, 0, 0],
-           [0, 0, 4, 14, 10, 0, 2, 0, 0],
-           [0, 0, 0, 0, 0, 2, 0, 1, 6],
-           [8, 11, 0, 0, 0, 0, 1, 0, 7],
-           [0, 0, 2, 0, 0, 0, 6, 7, 0]
+        self.display(dist)
+
+
+g = Graph(5)
+g.graph = [[1, 3, 0, 0, 0],
+           [0, 6, 9, 13, 0],
+           [22, 0, 14, 7, 6],
+           [8, 0, 5, 13, 0],
+           [12, 0, 14, 9, 15]
            ]
- 
-g.dijkstra(0)
+
+g.dijkstra(2)
