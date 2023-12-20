@@ -9,7 +9,7 @@ class Graph():
         queue.append(start)
         visited[start] = True
         traversal_path = []
-wqefwef
+
         while queue:
             vertex = queue.pop(0)
             traversal_path.append(vertex + 1)
