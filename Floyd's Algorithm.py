@@ -8,7 +8,7 @@ class Graph():
                 row.append(0)
             self.graph.append(row)
 
-    def floyd_warshall(self):
+    def floyd(self):
         A = []
         for i in range(self.vertices):
             row = []
@@ -44,7 +44,7 @@ g.graph = [
     [0, 2, 0]
 ]
 
-optimal_paths = g.floyd_warshall()
+optimal_paths = g.floyd()
 
 print("Final matrix A after Floyd's algorithm:")
 for row in optimal_paths:
