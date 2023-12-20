@@ -1,8 +1,8 @@
 The repository contains a basic implementation of the following graph algorithms:
-1. Dijkstra's algorithm
-2. Dynamic Programming
-3. Floyd's algorithm
-4. Breadth first search
-5. Depth first search
+1. Dijkstra's Algorithm
+2. Dynamic Programming Algorithm
+3. Floyd's Algorithm
+4. Breadth First Search
+5. Depth First Search
 6. Prim's Algorithm
-7. Kruskal's algorithm
+7. Kruskal's Algorithm
