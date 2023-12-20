@@ -4,40 +4,38 @@ class Graph():
         self.graph = [[0 for column in range(vertices)]
                       for row in range(vertices)]
 
-    def display(self, distance):
-        print("Vertex \t Distance from Source")
-        for node in range(self.vertices):
-            print(node, "\t\t", distance[node])
+    def dijkstra(self):
+        source_vertex = 0
+        distance = [float('inf')] * self.vertices
+        distance[source_vertex] = 0
+        final_set = set()
 
-    def minDistance(self, distance, verticesset):
-        min = 1e7
-        for v in range(self.vertices):
-            if distance[v] < min and verticesset[v] == False:
-                min = distance[v]
-                min_index = v
-        return min_index
-
-    def dijkstra(self, src):
-        dist = [1e7] * self.vertices
-        dist[src] = 0
-        sptSet = [False] * self.vertices
         for i in range(self.vertices):
-            u = self.minDistance(dist, sptSet)
-            sptSet[u] = True
-            for v in range(self.vertices):
-                if (self.graph[u][v] > 0 and
-                        sptSet[v] == False and
-                        dist[v] > dist[u] + self.graph[u][v]):
-                    dist[v] = dist[u] + self.graph[u][v]
-        self.display(dist)
+            min_distance = float('inf')
+            next_vertex = -1
 
+            for v in range(self.vertices):
+                if v not in final_set and distance[v] < min_distance:
+                    min_distance = distance[v]
+                    next_vertex = v
+
+            if next_vertex != -1:
+                final_set.add(next_vertex)
+                for v in range(self.vertices):
+                    if v not in final_set and self.graph[next_vertex][v] != 0:
+                        distance[v] = min(distance[v], distance[next_vertex] + self.graph[next_vertex][v])
+
+        final_vertices = [v + 1 for v in sorted(final_set)]
+        return final_vertices
 
 g = Graph(5)
-g.graph = [[1, 3, 0, 0, 0],
-           [0, 6, 9, 13, 0],
-           [22, 0, 14, 7, 6],
-           [8, 0, 5, 13, 0],
-           [12, 0, 14, 9, 15]
-           ]
+g.graph = [
+    [0, 10, 0, 30, 100],
+    [0, 0, 50, 0, 0],
+    [0, 0, 0, 0, 10],
+    [0, 0, 20, 0, 60],
+    [0, 0, 0, 0, 0]
+]
 
-g.dijkstra(2)
+final_vertices = g.dijkstra()
+print("S =", final_vertices)
